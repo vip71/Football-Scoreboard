@@ -17,4 +17,7 @@ public class Scoreboard {
     }
     return null;
   }
+
+  public void finishMatch(String homeTeam, String awayTeam) {
+  }
 }
