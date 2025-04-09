@@ -19,4 +19,8 @@ public class Scoreboard {
   public void finishMatch(String homeTeam, String awayTeam) {
     startedMatches.removeIf(match -> match.hasTeams(homeTeam, awayTeam));
   }
+
+  public String getSummary() {
+    return null;
+  }
 }
