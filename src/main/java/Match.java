@@ -19,4 +19,11 @@ public class Match {
   public boolean hasTeams(String homeTeam, String awayTeam) {
     return getHomeTeam().equals(homeTeam) && getAwayTeam().equals(awayTeam);
   }
+
+  public void setScore(int homeTeamScore, int awayTeamScore) {
+  }
+
+  public Score getScore() {
+    return null;
+  }
 }
