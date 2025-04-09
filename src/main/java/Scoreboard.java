@@ -2,7 +2,7 @@ import java.util.LinkedList;
 
 public class Scoreboard {
 
-  LinkedList<Match> startedMatches = new LinkedList<>();
+  final LinkedList<Match> startedMatches = new LinkedList<>();
 
   public void startMatch(String homeTeam, String awayTeam) {
     Match match = new Match(homeTeam, awayTeam);

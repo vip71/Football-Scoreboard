@@ -3,8 +3,9 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class TestUpdateScore {
+
   @DataProvider(name = "teamsAndScores")
-  public Object[][] teams() {
+  public Object[][] teamsAndScores() {
     return new Object[][]{
         {"Poland", "Denmark", 3, 2},
     };
