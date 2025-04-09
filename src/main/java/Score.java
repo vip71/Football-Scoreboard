@@ -15,4 +15,8 @@ public class Score {
   public int getAwayTeamScore() {
     return awayTeamScore;
   }
+
+  public int getTotal() {
+    return homeTeamScore + awayTeamScore;
+  }
 }

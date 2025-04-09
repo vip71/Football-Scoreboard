@@ -30,4 +30,10 @@ public class Match {
   public Score getScore() {
     return score;
   }
+
+  @Override
+  public String toString() {
+    return getHomeTeam()+" "+getScore().getHomeTeamScore()+" - "
+          +getAwayTeam()+" "+getScore().getAwayTeamScore();
+  }
 }
