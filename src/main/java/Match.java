@@ -3,6 +3,8 @@ public class Match {
 
   private final String awayTeam;
 
+  private Score score = new Score(0,0);
+
   public Match(String homeTeam, String awayTeam) {
     this.homeTeam = homeTeam;
     this.awayTeam = awayTeam;
@@ -21,9 +23,10 @@ public class Match {
   }
 
   public void setScore(int homeTeamScore, int awayTeamScore) {
+    score = new Score(homeTeamScore, awayTeamScore);
   }
 
   public Score getScore() {
-    return null;
+    return score;
   }
 }
