@@ -10,21 +10,13 @@ public class Scoreboard {
   }
 
   public Match getMatch(String homeTeam, String awayTeam) {
-    for (Match match : startedMatches) {
-      if(match.hasTeams(homeTeam, awayTeam)){
-        return match;
-      }
-    }
-    return null;
+    return startedMatches.stream()
+        .filter(match -> match.hasTeams(homeTeam, awayTeam))
+        .findFirst()
+        .orElse(null);
   }
 
   public void finishMatch(String homeTeam, String awayTeam) {
-    Match matchToFinish = null;
-    for (Match match : startedMatches) {
-      if(match.hasTeams(homeTeam, awayTeam)){
-        matchToFinish = match;
-      }
-    }
-    startedMatches.remove(matchToFinish);
+    startedMatches.removeIf(match -> match.hasTeams(homeTeam, awayTeam));
   }
 }
