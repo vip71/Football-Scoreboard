@@ -19,5 +19,12 @@ public class Scoreboard {
   }
 
   public void finishMatch(String homeTeam, String awayTeam) {
+    Match matchToFinish = null;
+    for (Match match : startedMatches) {
+      if(match.hasTeams(homeTeam, awayTeam)){
+        matchToFinish = match;
+      }
+    }
+    startedMatches.remove(matchToFinish);
   }
 }
