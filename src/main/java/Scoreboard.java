@@ -1,5 +1,4 @@
 import java.util.LinkedList;
-import java.util.Objects;
 
 public class Scoreboard {
 
@@ -12,7 +11,7 @@ public class Scoreboard {
 
   public Match getMatch(String homeTeam, String awayTeam) {
     for (Match match : startedMatches) {
-      if(Objects.equals(match.getHomeTeam(), homeTeam) && Objects.equals(match.getAwayTeam(), awayTeam)){
+      if(match.hasTeams(homeTeam, awayTeam)){
         return match;
       }
     }
