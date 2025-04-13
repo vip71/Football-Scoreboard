@@ -17,6 +17,11 @@ public class Score {
   }
 
   public int getTotal() {
-    return homeTeamScore + awayTeamScore;
+    return getHomeTeamScore() + getAwayTeamScore();
+  }
+
+  public boolean isNotLowerThen(Score other) {
+    return getAwayTeamScore() >= other.getHomeTeamScore()
+        && getAwayTeamScore() >= other.getAwayTeamScore();
   }
 }

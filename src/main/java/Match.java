@@ -27,8 +27,10 @@ public class Match {
     return score;
   }
 
-  public void setScore(Score score) {
-    this.score = score;
+  public void setScore(Score newScore) {
+    if(newScore.isNotLowerThen(getScore())) {
+      this.score = newScore;
+    }
   }
 
   @Override
