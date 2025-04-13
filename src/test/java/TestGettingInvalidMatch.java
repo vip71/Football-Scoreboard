@@ -2,7 +2,7 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class TestGettingInvalidMatch {
+public class TestGettingInvalidMatch extends LoggerTestBase {
 
   @DataProvider(name = "teams")
   public Object[][] teams() {
@@ -11,6 +11,15 @@ public class TestGettingInvalidMatch {
         {"Poland", "Denmark", "Denmark", "Poland"},
         {"Poland", "Denmark", "Poland", "Ukraine"},
     };
+  }
+
+  @Override
+  public Class<?> getLoggerClass() {
+    return Scoreboard.class;
+  }
+
+  private String getExpectedLog(String homeTeam, String awayTeam) {
+    return "Match with home team " + homeTeam + " and away team " + awayTeam + " has not been found";
   }
 
   @Test(dataProvider = "teams")
@@ -26,6 +35,8 @@ public class TestGettingInvalidMatch {
     Match match = scoreboard.getMatch(invalidHomeTeam, invalidAwayTeam);
     //Then Match is not found
     Assert.assertNull(match);
+    //And An attempt to get invalid match was noted in logger
+    Assert.assertTrue(logContains(getExpectedLog(invalidHomeTeam, invalidAwayTeam)));
   }
 
 }
