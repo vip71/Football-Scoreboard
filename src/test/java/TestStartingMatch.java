@@ -16,7 +16,7 @@ public class TestStartingMatch {
     //Given Scoreboard is created
     Scoreboard scoreboard = new Scoreboard();
     //When Match is started
-    scoreboard.startMatch(homeTeam, awayTeam);
+    scoreboard.startMatch(new Match(homeTeam, awayTeam));
     //Then match is saved in scoreboard
     Match match = scoreboard.getMatch(homeTeam, awayTeam);
     Assert.assertNotNull(match);

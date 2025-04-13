@@ -16,9 +16,9 @@ public class TestFinishingMatch {
     //Given Scoreboard has been created
     Scoreboard scoreboard = new Scoreboard();
     //And Match has been started
-    scoreboard.startMatch(homeTeam, awayTeam);
+    scoreboard.startMatch(new Match(homeTeam, awayTeam));
     //When Match is finished
-    scoreboard.finishMatch(homeTeam,awayTeam);
+    scoreboard.finishMatch(homeTeam, awayTeam);
     //Then Match is removed from scoreboard
     Match match = scoreboard.getMatch(homeTeam, awayTeam);
     Assert.assertNull(match);

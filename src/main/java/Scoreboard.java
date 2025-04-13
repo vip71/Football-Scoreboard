@@ -1,13 +1,12 @@
 import java.util.LinkedList;
 
-import static java.util.Comparator.comparingInt;
-
 public class Scoreboard {
 
-  final LinkedList<Match> startedMatches = new LinkedList<>();
+  private final LinkedList<Match> startedMatches = new LinkedList<>();
 
-  public void startMatch(String homeTeam, String awayTeam) {
-    Match match = new Match(homeTeam, awayTeam);
+  private final ScoreboardSummarizer summarizer = new ScoreboardSummarizer(startedMatches);
+
+  public void startMatch(Match match) {
     startedMatches.addFirst(match);
   }
 
@@ -23,14 +22,6 @@ public class Scoreboard {
   }
 
   public String getSummary() {
-    Match[] sortedMatches = startedMatches.stream()
-        .sorted(comparingInt(match -> -match.getScore().getTotal()))
-        .toArray(Match[]::new);
-
-    String[] matchSummaries = new String[sortedMatches.length];
-    for(int i = 0; i < sortedMatches.length; i++){
-      matchSummaries[i] = (i + 1) + ". "+sortedMatches[i].toString();
-    }
-    return String.join("\n",matchSummaries);
+    return summarizer.getSummary();
   }
 }

@@ -2,7 +2,7 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class TestUpdateScore {
+public class TestUpdatingScore {
 
   @DataProvider(name = "teamsAndScores")
   public Object[][] teamsAndScores() {
@@ -16,9 +16,10 @@ public class TestUpdateScore {
     //Given Scoreboard is created
     Scoreboard scoreboard = new Scoreboard();
     //And Match is started
-    scoreboard.startMatch(homeTeam, awayTeam);
+    scoreboard.startMatch(new Match(homeTeam, awayTeam));
     //When Match score is updated
-    scoreboard.getMatch(homeTeam,awayTeam).setScore(homeTeamScore, awayTeamScore);
+    Match match = scoreboard.getMatch(homeTeam, awayTeam);
+    match.setScore(new Score(homeTeamScore, awayTeamScore));
     //Then Match score is saved in scoreboard
     Score score = scoreboard.getMatch(homeTeam, awayTeam).getScore();
     Assert.assertEquals(score.getHomeTeamScore(), homeTeamScore);
