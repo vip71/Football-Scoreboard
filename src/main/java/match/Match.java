@@ -5,8 +5,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import score.Score;
 
-import java.util.Objects;
-
 @Slf4j
 @RequiredArgsConstructor
 public class Match {
@@ -17,8 +15,16 @@ public class Match {
   @Getter
   private Score score = new Score(0, 0);
 
-  public boolean hasTeams(String otherHomeTeam, String otherAwayTeam) {
+  public boolean hasExactTeams(String otherHomeTeam, String otherAwayTeam) {
     return homeTeam.equals(otherHomeTeam) && awayTeam.equals(otherAwayTeam);
+  }
+
+  public boolean sharesAnyTeamWith(Match newMatch) {
+    return containsTeam(newMatch.homeTeam) || containsTeam(newMatch.awayTeam);
+  }
+
+  private boolean containsTeam(String team) {
+    return homeTeam.equals(team) || awayTeam.equals(team);
   }
 
   public void setScore(Score newScore) {
@@ -37,12 +43,5 @@ public class Match {
   public String toString() {
     return homeTeam + " " + getScore().getHomeTeamScore() + " - "
         + awayTeam + " " + getScore().getAwayTeamScore();
-  }
-
-  public boolean hasSameTeam(Match newMatch) {
-    return homeTeam.equals(newMatch.homeTeam)
-        || awayTeam.equals(newMatch.homeTeam)
-        || homeTeam.equals(newMatch.awayTeam)
-        || awayTeam.equals(newMatch.awayTeam);
   }
 }

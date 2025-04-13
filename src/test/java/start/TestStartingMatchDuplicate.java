@@ -12,7 +12,7 @@ public class TestStartingMatchDuplicate extends LoggerTestBase {
   @DataProvider(name = "teams")
   public Object[][] teams() {
     return new Object[][]{
-        {"Poland", "Denmark", "Poland", "Denmark"},
+        {"Poland", "Denmark"},
     };
   }
 
@@ -26,17 +26,14 @@ public class TestStartingMatchDuplicate extends LoggerTestBase {
   }
 
   @Test(dataProvider = "teams")
-  public void testStartingMatchWithOccupiedTeam(String homeTeam,
-                                                String awayTeam,
-                                                String invalidHomeTeam,
-                                                String invalidAwayTeam) {
+  public void testStartingMatchWithOccupiedTeam(String homeTeam, String awayTeam) {
     //Given Scoreboard is created and one match is started
     Scoreboard scoreboard = new Scoreboard();
     scoreboard.startMatch(new Match(homeTeam, awayTeam));
     //When User tries to start match with same teams
-    Match invalidMatch = new Match(invalidHomeTeam, invalidAwayTeam);
-    scoreboard.startMatch(invalidMatch);
+    Match duplicateTeam = new Match(homeTeam, awayTeam);
+    scoreboard.startMatch(duplicateTeam);
     //Then An attempt to create match with occupied teams was noted in logger
-    Assert.assertTrue(logContains(getExpectedLog(invalidMatch)));
+    Assert.assertTrue(logContains(getExpectedLog(duplicateTeam)));
   }
 }

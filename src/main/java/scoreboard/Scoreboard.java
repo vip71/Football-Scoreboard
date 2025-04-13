@@ -13,10 +13,9 @@ public class Scoreboard {
   private final ScoreboardSummarizer summarizer = new ScoreboardSummarizer(startedMatches);
 
   public void startMatch(Match newMatch) {
-    if(canMatchBeStarted(newMatch)) {
+    if (canMatchBeStarted(newMatch)) {
       startedMatches.addFirst(newMatch);
-    }
-    else {
+    } else {
       logMatchWithOccupiedTeam(newMatch);
     }
   }
@@ -26,7 +25,7 @@ public class Scoreboard {
   }
 
   private boolean canMatchBeStarted(Match newMatch) {
-    return startedMatches.stream().noneMatch(startedMatch -> startedMatch.hasSameTeam(newMatch));
+    return startedMatches.stream().noneMatch(startedMatch -> startedMatch.sharesAnyTeamWith(newMatch));
   }
 
   public Match getMatch(String homeTeam, String awayTeam) {
@@ -40,7 +39,7 @@ public class Scoreboard {
 
   private Optional<Match> filterFirstMatch(String homeTeam, String awayTeam) {
     return startedMatches.stream()
-        .filter(match -> match.hasTeams(homeTeam, awayTeam))
+        .filter(match -> match.hasExactTeams(homeTeam, awayTeam))
         .findFirst();
   }
 
@@ -49,7 +48,7 @@ public class Scoreboard {
   }
 
   public void finishMatch(String homeTeam, String awayTeam) {
-    startedMatches.removeIf(match -> match.hasTeams(homeTeam, awayTeam));
+    startedMatches.removeIf(match -> match.hasExactTeams(homeTeam, awayTeam));
   }
 
   public String getSummary() {
