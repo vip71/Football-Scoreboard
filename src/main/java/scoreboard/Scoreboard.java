@@ -48,7 +48,16 @@ public class Scoreboard {
   }
 
   public void finishMatch(String homeTeam, String awayTeam) {
-    startedMatches.removeIf(match -> match.hasExactTeams(homeTeam, awayTeam));
+    if(getMatch(homeTeam, awayTeam) != null) {
+      startedMatches.removeIf(match -> match.hasExactTeams(homeTeam, awayTeam));
+    }
+    else {
+      logMatchCannotBeFinished(homeTeam, awayTeam);
+    }
+  }
+
+  private void logMatchCannotBeFinished(String homeTeam, String awayTeam) {
+    log.info("Match with home team " + homeTeam + " and away team " + awayTeam + " cannot be finished");
   }
 
   public String getSummary() {
