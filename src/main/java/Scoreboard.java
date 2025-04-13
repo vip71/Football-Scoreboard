@@ -6,11 +6,9 @@ import java.util.Optional;
 
 public class Scoreboard {
 
-  private final LinkedList<Match> startedMatches = new LinkedList<>();
-
-  private final ScoreboardSummarizer summarizer = new ScoreboardSummarizer(startedMatches);
-
   private static final Logger logger = LoggerFactory.getLogger(Scoreboard.class);
+  private final LinkedList<Match> startedMatches = new LinkedList<>();
+  private final ScoreboardSummarizer summarizer = new ScoreboardSummarizer(startedMatches);
 
   public void startMatch(Match match) {
     startedMatches.addFirst(match);
@@ -19,10 +17,10 @@ public class Scoreboard {
   public Match getMatch(String homeTeam, String awayTeam) {
     return
         filterFirstMatch(homeTeam, awayTeam)
-        .orElseGet(() -> {
-          handleMissingMatch(homeTeam, awayTeam);
-          return null;
-        });
+            .orElseGet(() -> {
+              logMissingMatch(homeTeam, awayTeam);
+              return null;
+            });
   }
 
   private Optional<Match> filterFirstMatch(String homeTeam, String awayTeam) {
@@ -31,8 +29,8 @@ public class Scoreboard {
         .findFirst();
   }
 
-  private static void handleMissingMatch(String homeTeam, String awayTeam) {
-    logger.info("Match with teams: " + homeTeam + ", " + awayTeam + " has not been found");
+  private void logMissingMatch(String homeTeam, String awayTeam) {
+    logger.info("Match with home team " + homeTeam + " and away team " + awayTeam + " has not been found");
   }
 
   public void finishMatch(String homeTeam, String awayTeam) {
