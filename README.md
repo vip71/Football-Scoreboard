@@ -41,6 +41,7 @@ so it is less computationally expensive to sort matches before summarizing
 then updating elements position in list each time score changes.
 - Scoreboard can be reused to track matches from other events like champions league.
 In order to ensure system flexibility names of each team are not checked if they are actually names of countries.
+The only requirement for team name is not to be null.
 
 ## Conventions
 - Lombok annotations are used to enhance quality of codebase, by eliminating generic parts of code.

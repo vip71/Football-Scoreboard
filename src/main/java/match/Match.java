@@ -1,6 +1,7 @@
 package match;
 
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import score.Score;
@@ -9,7 +10,9 @@ import score.Score;
 @RequiredArgsConstructor
 public class Match {
 
+  @NonNull
   private final String homeTeam;
+  @NonNull
   private final String awayTeam;
 
   @Getter
