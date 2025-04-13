@@ -1,18 +1,17 @@
+import lombok.RequiredArgsConstructor;
+
 import java.util.Comparator;
 import java.util.LinkedList;
 
 import static java.util.Comparator.comparingInt;
 
+@RequiredArgsConstructor
 public class ScoreboardSummarizer {
-
-  private final LinkedList<Match> startedMatches;
 
   private static final Comparator<Match> DESCENDING_SCORE_COMPARATOR
       = comparingInt((Match match) -> -match.getScore().getTotal());
 
-  ScoreboardSummarizer(LinkedList<Match> startedMatches){
-    this.startedMatches = startedMatches;
-  }
+  private final LinkedList<Match> startedMatches;
 
   public String getSummary() {
     Match[] sortedMatches = sortByDescendingScore(startedMatches);

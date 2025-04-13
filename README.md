@@ -37,4 +37,7 @@ If user tries to set new decremented score for one team and valid score for oppo
 so it is less computationally expensive to sort matches before summarizing
 then updating elements position in list each time score changes.
 - Scoreboard can be reused to track matches from other events like champions league.
-In order to ensure system flexibility names of each team is not checked if there are actually names of countries. 
+In order to ensure system flexibility names of each team is not checked if there are actually names of countries.
+
+## Conventions
+- Lombok annotations are used to enhance quality of codebase, by eliminating generic parts of code.

@@ -1,12 +1,11 @@
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.LinkedList;
 import java.util.Optional;
 
+@Slf4j
 public class Scoreboard {
 
-  private static final Logger logger = LoggerFactory.getLogger(Scoreboard.class);
   private final LinkedList<Match> startedMatches = new LinkedList<>();
   private final ScoreboardSummarizer summarizer = new ScoreboardSummarizer(startedMatches);
 
@@ -30,7 +29,7 @@ public class Scoreboard {
   }
 
   private void logMissingMatch(String homeTeam, String awayTeam) {
-    logger.info("Match with home team " + homeTeam + " and away team " + awayTeam + " has not been found");
+    log.info("Match with home team " + homeTeam + " and away team " + awayTeam + " has not been found");
   }
 
   public void finishMatch(String homeTeam, String awayTeam) {

@@ -1,24 +1,19 @@
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
+@RequiredArgsConstructor
 public class Match {
 
-  private static final Logger logger = LoggerFactory.getLogger(Match.class);
   private final String homeTeam;
   private final String awayTeam;
-  private Score score = new Score(0, 0);
 
-  public Match(String homeTeam, String awayTeam) {
-    this.homeTeam = homeTeam;
-    this.awayTeam = awayTeam;
-  }
+  @Getter
+  private Score score = new Score(0, 0);
 
   public boolean hasTeams(String otherHomeTeam, String otherAwayTeam) {
     return homeTeam.equals(otherHomeTeam) && awayTeam.equals(otherAwayTeam);
-  }
-
-  public Score getScore() {
-    return score;
   }
 
   public void setScore(Score newScore) {
@@ -30,7 +25,7 @@ public class Match {
   }
 
   private void logAttemptToDecrementScore(Score newScore) {
-    logger.info("Score " + getScore() + " cannot be decremented to " + newScore);
+    log.info("Score " + getScore() + " cannot be decremented to " + newScore);
   }
 
   @Override
