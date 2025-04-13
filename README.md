@@ -27,16 +27,17 @@ Negative tests are also performed in order to ensure proper error handling.
 - Acquiring match with teams that do not play right now returns null. 
 Acquiring match with inverted home and away teams to existing match also returns null.
 This actions result in logging error message.
+- Finishing not existing match results in logging error message.
 - An attempt to decrement score of team is aborted and results in logging error message. 
 If user tries to set new decremented score for one team and valid score for opposing team in one attempt neither score is updated.
 
 ## Assumptions
 - Team can play only in one match at once.
-- score cannot be decremented.
+- Score cannot be decremented.
 - Updating score is generally more frequent than summary current matches, 
 so it is less computationally expensive to sort matches before summary
 then updating elements position in list each time score changes.
-- scoreboard can be reused to track matches from other events like champions league.
+- Scoreboard can be reused to track matches from other events like champions league.
 In order to ensure system flexibility names of each team is not checked if there are actually names of countries.
 
 ## Conventions
