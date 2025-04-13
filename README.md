@@ -68,11 +68,15 @@ Checks if this score is greater than or equal to the given `other` score for bot
 #### `String toString()`
 Returns a string representation of the score in the format `(home:away)`.
 ## Tests
-Tests are utilising TestNG library. Test data is separated from code and stored in data providers.
+- Tests are utilising TestNG library. Test data is separated from code and stored in data providers.
 Tests are written using "Given-When-Then" format.
-All the features are tested. 
+
+- All the features are tested. 
 Negative tests are also performed in order to ensure proper error handling.
 Some tests are checking logs to guarantee invalid usages of scoreboard are displayed.
+
+- Tests of summarizing scores of matches have very complex data sets
+so test data has been abstracted to supporting classes.
 
 ## Error Handling
 - An attempt to add new match with currently playing team is aborted and results in logging error message.
@@ -86,12 +90,13 @@ If user tries to set new decremented score for one team and valid score for oppo
 ## Assumptions
 - Team can play only in one match at once.
 - Score cannot be decremented.
-- Updating score is generally more frequent than summarizing current matches, 
-so it is less computationally expensive to sort matches before summarizing
-then updating elements position in list each time score changes.
+- Tracking real-life time of matches is not responsibility of this library.
 - Scoreboard can be reused to track matches from other events like champions league.
 In order to ensure system flexibility names of each team are not checked if they are actually names of countries.
 The only requirement for team name is not to be null.
+- Updating score is generally more frequent than summarizing current matches, 
+so it is less computationally expensive to sort matches before summarizing
+then updating elements position in list each time score changes.
 
 ## Conventions
 - Lombok annotations are used to enhance quality of codebase, by eliminating generic parts of code.
@@ -103,3 +108,5 @@ by avoiding using try-catch blocks and optionals that increase visual complexity
 The drawback of this solution is that user has to check if value is not null on their own.
 The aim of project was to prepare the simplest solution to the problem and usage of
 optionals or try-catch blocks is in opinion of developer more complex.
+- Operations on collections that do not use indexing are written using streams api.
+- Operations on collections that use indexing are written as traditional for loops.
