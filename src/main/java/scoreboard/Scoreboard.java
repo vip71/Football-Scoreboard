@@ -1,27 +1,22 @@
 package scoreboard;
 
-import lombok.extern.slf4j.Slf4j;
 import match.Match;
 
 import java.util.LinkedList;
 import java.util.Optional;
 
-@Slf4j
 public class Scoreboard {
 
   private final LinkedList<Match> startedMatches = new LinkedList<>();
   private final ScoreboardSummarizer summarizer = new ScoreboardSummarizer(startedMatches);
+  private final ScoreboardLogger logger = new ScoreboardLogger();
 
   public void startMatch(Match newMatch) {
     if (canMatchBeStarted(newMatch)) {
       startedMatches.addFirst(newMatch);
     } else {
-      logMatchWithOccupiedTeam(newMatch);
+      logger.logMatchWithOccupiedTeam(newMatch);
     }
-  }
-
-  private void logMatchWithOccupiedTeam(Match match) {
-    log.info("Match " + match + " cannot be started because one of teams is occupied");
   }
 
   private boolean canMatchBeStarted(Match newMatch) {
@@ -32,7 +27,7 @@ public class Scoreboard {
     return
         filterFirstMatch(homeTeam, awayTeam)
             .orElseGet(() -> {
-              logMissingMatch(homeTeam, awayTeam);
+              logger.logMissingMatch(homeTeam, awayTeam);
               return null;
             });
   }
@@ -43,21 +38,16 @@ public class Scoreboard {
         .findFirst();
   }
 
-  private void logMissingMatch(String homeTeam, String awayTeam) {
-    log.info("Match with home team " + homeTeam + " and away team " + awayTeam + " has not been found");
-  }
-
   public void finishMatch(String homeTeam, String awayTeam) {
-    if(getMatch(homeTeam, awayTeam) != null) {
+    if (hasMatch(homeTeam, awayTeam)) {
       startedMatches.removeIf(match -> match.hasExactTeams(homeTeam, awayTeam));
-    }
-    else {
-      logMatchCannotBeFinished(homeTeam, awayTeam);
+    } else {
+      logger.logMatchCannotBeFinished(homeTeam, awayTeam);
     }
   }
 
-  private void logMatchCannotBeFinished(String homeTeam, String awayTeam) {
-    log.info("Match with home team " + homeTeam + " and away team " + awayTeam + " cannot be finished");
+  private boolean hasMatch(String homeTeam, String awayTeam) {
+    return filterFirstMatch(homeTeam, awayTeam).isPresent();
   }
 
   public String getSummary() {

@@ -6,6 +6,7 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import scoreboard.Scoreboard;
+import scoreboard.ScoreboardLogger;
 
 public class TestStartingMatchDuplicate extends LoggerTestBase {
 
@@ -18,7 +19,7 @@ public class TestStartingMatchDuplicate extends LoggerTestBase {
 
   @Override
   public Class<?> getLoggerClass() {
-    return Scoreboard.class;
+    return ScoreboardLogger.class;
   }
 
   private String getExpectedLog(Match match) {

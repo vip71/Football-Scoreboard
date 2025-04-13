@@ -16,7 +16,7 @@ public class ScoreboardSummarizer {
 
   private final LinkedList<Match> startedMatches;
 
-  public String getSummary() {
+  String getSummary() {
     Match[] sortedMatches = sortByDescendingScore(startedMatches);
     String[] records = getSummaryRecords(sortedMatches);
     return joinRecords(records);

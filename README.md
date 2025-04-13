@@ -12,7 +12,8 @@ This project is being developed using TDD approach.
 ## Entities
 - **scoreboard**: Stores all the matches and allows for updating and viewing the scores. 
 Matches are stored in list and are sorted by time of their start, from the most recent to the least recent. 
-- **scoreboard Summarizer**: Helper of scoreboard, prepares summary of all currently played matches.
+- **scoreboard summarizer**: Helper of scoreboard, prepares summary of all currently played matches.
+- **scoreboard logger**: Helper of scoreboard, provides logging functionality.
 - **match**: Represents a match between two teams. Stores only names of home team and away team and score.
 - **score**: Represents the score of a match, two integers one for home team and the other for away team.
 

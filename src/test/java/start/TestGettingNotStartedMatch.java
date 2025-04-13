@@ -6,6 +6,7 @@ import scoreboard.Scoreboard;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import scoreboard.ScoreboardLogger;
 
 public class TestGettingNotStartedMatch extends LoggerTestBase {
 
@@ -20,7 +21,7 @@ public class TestGettingNotStartedMatch extends LoggerTestBase {
 
   @Override
   public Class<?> getLoggerClass() {
-    return Scoreboard.class;
+    return ScoreboardLogger.class;
   }
 
   private String getExpectedLog(String homeTeam, String awayTeam) {
