@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
-public abstract class LoggerTestBase {
+public abstract class LoggerListeningTest {
 
   protected ListAppender<ILoggingEvent> listAppender;
 

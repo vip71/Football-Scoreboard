@@ -1,13 +1,13 @@
 package finish;
 
-import base.LoggerTestBase;
+import base.LoggerCheckingTest;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import scoreboard.Scoreboard;
 import scoreboard.ScoreboardLogger;
 
-public class TestFinishingNotExistingMatch extends LoggerTestBase {
+public class TestFinishingNotExistingMatch extends LoggerCheckingTest {
 
   @DataProvider(name = "teams")
   public Object[][] teams() {
@@ -21,10 +21,6 @@ public class TestFinishingNotExistingMatch extends LoggerTestBase {
     return ScoreboardLogger.class;
   }
 
-  private String getExpectedLog(String homeTeam, String awayTeam) {
-    return "Match with home team " + homeTeam + " and away team " + awayTeam + " cannot be finished";
-  }
-
   @Test(dataProvider = "teams")
   public void testFinishingNotExistingMatch(String homeTeam, String awayTeam) {
     //Given Scoreboard is created
@@ -32,7 +28,7 @@ public class TestFinishingNotExistingMatch extends LoggerTestBase {
     //When User tries to finish not existing match
     scoreboard.finishMatch(homeTeam, awayTeam);
     //Then Attempt to finish not started match is noted in logger
-    Assert.assertTrue(logContains(getExpectedLog(homeTeam, awayTeam)));
+    Assert.assertTrue(logContains(getMatchCannotBeFinishedLog(homeTeam, awayTeam)));
   }
 
 }

@@ -1,14 +1,14 @@
 package update;
 
-import base.LoggerTestBase;
+import base.LoggerCheckingTest;
 import match.Match;
-import score.Score;
-import scoreboard.Scoreboard;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import score.Score;
+import scoreboard.Scoreboard;
 
-public class TestDecrementingScore extends LoggerTestBase {
+public class TestDecrementingScore extends LoggerCheckingTest {
 
   @DataProvider(name = "teamsAndScores")
   public Object[][] teamsAndScores() {
@@ -22,10 +22,6 @@ public class TestDecrementingScore extends LoggerTestBase {
   @Override
   public Class<?> getLoggerClass() {
     return Match.class;
-  }
-
-  private String getExpectedLog(Score newScore, Score score) {
-    return "score " + score + " cannot be decremented to " + newScore;
   }
 
   @Test(dataProvider = "teamsAndScores")
@@ -49,6 +45,6 @@ public class TestDecrementingScore extends LoggerTestBase {
     Assert.assertEquals(score.getHomeTeamScore(), previousHomeScore);
     Assert.assertEquals(score.getAwayTeamScore(), previousAwayScore);
     //And An attempt to decrement score was noted in logger
-    Assert.assertTrue(logContains(getExpectedLog(newScore, score)));
+    Assert.assertTrue(logContains(getScoreCannotBeDecrementedLog(newScore, score)));
   }
 }

@@ -1,14 +1,14 @@
 package start;
 
-import base.LoggerTestBase;
+import base.LoggerCheckingTest;
 import match.Match;
-import scoreboard.Scoreboard;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import scoreboard.Scoreboard;
 import scoreboard.ScoreboardLogger;
 
-public class TestGettingNotStartedMatch extends LoggerTestBase {
+public class TestGettingNotStartedMatch extends LoggerCheckingTest {
 
   @DataProvider(name = "teams")
   public Object[][] teams() {
@@ -22,10 +22,6 @@ public class TestGettingNotStartedMatch extends LoggerTestBase {
   @Override
   public Class<?> getLoggerClass() {
     return ScoreboardLogger.class;
-  }
-
-  private String getExpectedLog(String homeTeam, String awayTeam) {
-    return "Match with home team " + homeTeam + " and away team " + awayTeam + " has not been found";
   }
 
   @Test(dataProvider = "teams")
@@ -42,7 +38,7 @@ public class TestGettingNotStartedMatch extends LoggerTestBase {
     //Then Match is not found
     Assert.assertNull(match);
     //And An attempt to get invalid match was noted in logger
-    Assert.assertTrue(logContains(getExpectedLog(invalidHomeTeam, invalidAwayTeam)));
+    Assert.assertTrue(logContains(getMatchHasNotBeenFoundLog(invalidHomeTeam, invalidAwayTeam)));
   }
 
 }

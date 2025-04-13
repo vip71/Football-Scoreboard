@@ -1,6 +1,6 @@
 package start;
 
-import base.LoggerTestBase;
+import base.LoggerCheckingTest;
 import match.Match;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 import scoreboard.Scoreboard;
 import scoreboard.ScoreboardLogger;
 
-public class TestStartingMatchWithOccupiedTeam extends LoggerTestBase {
+public class TestStartingMatchWithOccupiedTeam extends LoggerCheckingTest {
 
   @DataProvider(name = "teams")
   public Object[][] teams() {
@@ -24,15 +24,11 @@ public class TestStartingMatchWithOccupiedTeam extends LoggerTestBase {
     return ScoreboardLogger.class;
   }
 
-  private String getExpectedLog(Match match) {
-    return "Match " + match + " cannot be started because one of teams is occupied";
-  }
-
   @Test(dataProvider = "teams")
   public void testStartingMatchWithOccupiedTeam(String homeTeam,
-                                         String awayTeam,
-                                         String invalidHomeTeam,
-                                         String invalidAwayTeam) {
+                                                String awayTeam,
+                                                String invalidHomeTeam,
+                                                String invalidAwayTeam) {
     //Given Scoreboard is created and one match is started
     Scoreboard scoreboard = new Scoreboard();
     scoreboard.startMatch(new Match(homeTeam, awayTeam));
@@ -43,6 +39,6 @@ public class TestStartingMatchWithOccupiedTeam extends LoggerTestBase {
     Match foundInvalidMatch = scoreboard.getMatch(invalidHomeTeam, invalidAwayTeam);
     Assert.assertNull(foundInvalidMatch);
     //And An attempt to create match with occupied team was noted in logger
-    Assert.assertTrue(logContains(getExpectedLog(invalidMatch)));
+    Assert.assertTrue(logContains(getMatchCannotBeStartedLog(invalidMatch)));
   }
 }
