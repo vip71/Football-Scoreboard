@@ -1,6 +1,9 @@
+package match;
+
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import score.Score;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -25,7 +28,7 @@ public class Match {
   }
 
   private void logAttemptToDecrementScore(Score newScore) {
-    log.info("Score " + getScore() + " cannot be decremented to " + newScore);
+    log.info("score " + getScore() + " cannot be decremented to " + newScore);
   }
 
   @Override

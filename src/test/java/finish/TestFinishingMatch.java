@@ -1,8 +1,12 @@
+package finish;
+
+import match.Match;
+import scoreboard.Scoreboard;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class TestStartingMatch {
+public class TestFinishingMatch {
 
   @DataProvider(name = "teams")
   public Object[][] teams() {
@@ -12,14 +16,16 @@ public class TestStartingMatch {
   }
 
   @Test(dataProvider = "teams")
-  public void testStartingMatch(String homeTeam, String awayTeam) {
-    //Given Scoreboard is created
+  public void testFinishingMatch(String homeTeam, String awayTeam) {
+    //Given Scoreboard has been created
     Scoreboard scoreboard = new Scoreboard();
-    //When Match is started
+    //And Match has been started
     scoreboard.startMatch(new Match(homeTeam, awayTeam));
-    //Then match is saved in scoreboard
+    //When Match is finished
+    scoreboard.finishMatch(homeTeam, awayTeam);
+    //Then Match is removed from scoreboard
     Match match = scoreboard.getMatch(homeTeam, awayTeam);
-    Assert.assertNotNull(match);
+    Assert.assertNull(match);
   }
-
 }
+

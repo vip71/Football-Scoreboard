@@ -1,3 +1,5 @@
+package score;
+
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 

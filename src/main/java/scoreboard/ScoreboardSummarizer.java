@@ -1,4 +1,7 @@
+package scoreboard;
+
 import lombok.RequiredArgsConstructor;
+import match.Match;
 
 import java.util.Comparator;
 import java.util.LinkedList;

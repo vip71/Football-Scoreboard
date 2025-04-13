@@ -1,3 +1,8 @@
+package summary;
+
+import match.Match;
+import score.Score;
+import scoreboard.Scoreboard;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;

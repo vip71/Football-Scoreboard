@@ -1,5 +1,5 @@
 ## Overview
-This is a simple Java library that simulates a Live Football World Cup Score Board. It allows you to add matches, update scores, and view the current match standings.
+This is a simple Java library that simulates a Live Football World Cup score Board. It allows you to add matches, update scores, and view the current match standings.
 This project is being developed using TDD approach.
 
 ## Features
@@ -10,11 +10,11 @@ This project is being developed using TDD approach.
 
 
 ## Entities
-- **Scoreboard**: Stores all the matches and allows for updating and viewing the scores. 
+- **scoreboard**: Stores all the matches and allows for updating and viewing the scores. 
 Matches are stored in list and are sorted by time of their start, from the most recent to the least recent. 
-- **Scoreboard Summarizer**: Helper of scoreboard, prepares summary of all currently played matches.
-- **Match**: Represents a match between two teams. Stores only names of home team and away team and score.
-- **Score**: Represents the score of a match, two integers one for home team and the other for away team.
+- **scoreboard Summarizer**: Helper of scoreboard, prepares summary of all currently played matches.
+- **match**: Represents a match between two teams. Stores only names of home team and away team and score.
+- **score**: Represents the score of a match, two integers one for home team and the other for away team.
 
 ## Tests
 Tests are utilising TestNG library. Test data is separated from code and stored in data providers.
@@ -32,11 +32,11 @@ If user tries to set new decremented score for one team and valid score for oppo
 
 ## Assumptions
 - Team can play only in one match at once.
-- Score cannot be decremented.
-- Updating score is generally more frequent than summarizing current matches, 
-so it is less computationally expensive to sort matches before summarizing
+- score cannot be decremented.
+- Updating score is generally more frequent than summary current matches, 
+so it is less computationally expensive to sort matches before summary
 then updating elements position in list each time score changes.
-- Scoreboard can be reused to track matches from other events like champions league.
+- scoreboard can be reused to track matches from other events like champions league.
 In order to ensure system flexibility names of each team is not checked if there are actually names of countries.
 
 ## Conventions

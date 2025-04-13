@@ -1,8 +1,13 @@
+package start;
+
+import base.LoggerTestBase;
+import match.Match;
+import scoreboard.Scoreboard;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class TestGettingInvalidMatch extends LoggerTestBase {
+public class TestGettingNotStartedMatch extends LoggerTestBase {
 
   @DataProvider(name = "teams")
   public Object[][] teams() {
@@ -23,10 +28,10 @@ public class TestGettingInvalidMatch extends LoggerTestBase {
   }
 
   @Test(dataProvider = "teams")
-  public void testGettingInvalidMatch(String homeTeam,
-                                      String awayTeam,
-                                      String invalidHomeTeam,
-                                      String invalidAwayTeam) {
+  public void testGettingNotStartedMatch(String homeTeam,
+                                         String awayTeam,
+                                         String invalidHomeTeam,
+                                         String invalidAwayTeam) {
     //Given Scoreboard is created
     Scoreboard scoreboard = new Scoreboard();
     //And One match is started

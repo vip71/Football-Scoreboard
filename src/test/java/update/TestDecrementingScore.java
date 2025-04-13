@@ -1,3 +1,9 @@
+package update;
+
+import base.LoggerTestBase;
+import match.Match;
+import score.Score;
+import scoreboard.Scoreboard;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -19,7 +25,7 @@ public class TestDecrementingScore extends LoggerTestBase {
   }
 
   private String getExpectedLog(Score newScore, Score score) {
-    return "Score " + score + " cannot be decremented to " + newScore;
+    return "score " + score + " cannot be decremented to " + newScore;
   }
 
   @Test(dataProvider = "teamsAndScores")
