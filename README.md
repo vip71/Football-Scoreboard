@@ -10,13 +10,63 @@ This project is being developed using TDD approach.
 
 
 ## Entities
-- **scoreboard**: Stores all the matches and allows for updating and viewing the scores. 
-Matches are stored in list and are sorted by time of their start, from the most recent to the least recent. 
-- **scoreboard summarizer**: Helper of scoreboard, prepares summary of all currently played matches.
-- **scoreboard logger**: Helper of scoreboard, provides logging functionality.
-- **match**: Represents a match between two teams. Stores only names of home team and away team and score.
-- **score**: Represents the score of a match, two integers one for home team and the other for away team.
+### Scoreboard
+Stores all the matches and allows for updating and viewing the scores. 
+Matches are stored in list and are sorted by time of their start, from the most recent to the least recent.
+#### `void startMatch(Match match)`
+Starts a new match if neither team is already involved in another ongoing match.  
+Logs a message if a match cannot be started due to team conflict.
 
+#### `Match getMatch(String homeTeam, String awayTeam)`
+Retrieves the first match that exactly matches the given home and away team names.  
+Returns `null` and logs a message if no such match is found.
+
+#### `void finishMatch(String homeTeam, String awayTeam)`
+Finishes and removes the match that exactly matches the given teams.  
+Logs a message if no such match exists to be finished.
+
+#### `String getSummary()`
+Returns a summary of all started matches using the `ScoreboardSummarizer`.
+### ScoreboardSummarizer
+Helper of scoreboard, prepares summary of all currently played matches.
+### ScoreboardLogger
+Helper of scoreboard, provides logging functionality.
+### Match
+Represents a match between two teams. Stores only names of home team and away team and score.
+
+#### `boolean hasExactTeams(String otherHomeTeam, String otherAwayTeam)`
+Checks whether the match involves exactly the given home and away team names.
+
+#### `boolean sharesAnyTeamWith(Match newMatch)`
+Checks whether this match shares either team with another match.
+
+#### `void setScore(Score score)`
+Updates the score of the match to the provided `score`, but only if the new score is not lower than the current one for either team.  
+Logs an info message if an attempt is made to decrement the score.
+
+#### `Score getScore()`
+Returns the current score of the match.
+
+#### `String toString()`
+Returns a string representation of the match.
+
+### Score
+Represents the score of a match, two integers one for home team and the other for away team.
+
+#### `int getHomeTeamScore()`
+Returns the score of the home team.
+
+#### `int getAwayTeamScore()`
+Returns the score of the away team.
+
+#### `int getTotal()`
+Returns the total score of both teams combined.
+
+#### `boolean isNotLowerThen(Score other)`
+Checks if this score is greater than or equal to the given `other` score for both home and away teams.
+
+#### `String toString()`
+Returns a string representation of the score in the format `(home:away)`.
 ## Tests
 Tests are utilising TestNG library. Test data is separated from code and stored in data providers.
 Tests are written using "Given-When-Then" format.
