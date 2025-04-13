@@ -21,8 +21,8 @@ public class TestStartingMatchDuplicate extends LoggerTestBase {
     return Scoreboard.class;
   }
 
-  private String getExpectedLog(String homeTeam, String awayTeam) {
-    return "Teams " + homeTeam + " and " + awayTeam + " cannot start the match because one of them is occupied";
+  private String getExpectedLog(Match match) {
+    return "Match " + match + " cannot be started because one of teams is occupied";
   }
 
   @Test(dataProvider = "teams")
@@ -34,8 +34,9 @@ public class TestStartingMatchDuplicate extends LoggerTestBase {
     Scoreboard scoreboard = new Scoreboard();
     scoreboard.startMatch(new Match(homeTeam, awayTeam));
     //When User tries to start match with same teams
-    scoreboard.startMatch(new Match(invalidHomeTeam, invalidAwayTeam));
+    Match invalidMatch = new Match(invalidHomeTeam, invalidAwayTeam);
+    scoreboard.startMatch(invalidMatch);
     //Then An attempt to create match with occupied teams was noted in logger
-    Assert.assertTrue(logContains(getExpectedLog(invalidHomeTeam, invalidAwayTeam)));
+    Assert.assertTrue(logContains(getExpectedLog(invalidMatch)));
   }
 }

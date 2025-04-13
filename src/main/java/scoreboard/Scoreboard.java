@@ -12,8 +12,21 @@ public class Scoreboard {
   private final LinkedList<Match> startedMatches = new LinkedList<>();
   private final ScoreboardSummarizer summarizer = new ScoreboardSummarizer(startedMatches);
 
-  public void startMatch(Match match) {
-    startedMatches.addFirst(match);
+  public void startMatch(Match newMatch) {
+    if(canMatchBeStarted(newMatch)) {
+      startedMatches.addFirst(newMatch);
+    }
+    else {
+      logMatchWithOccupiedTeam(newMatch);
+    }
+  }
+
+  private void logMatchWithOccupiedTeam(Match match) {
+    log.info("Match " + match + " cannot be started because one of teams is occupied");
+  }
+
+  private boolean canMatchBeStarted(Match newMatch) {
+    return startedMatches.stream().noneMatch(startedMatch -> startedMatch.hasSameTeam(newMatch));
   }
 
   public Match getMatch(String homeTeam, String awayTeam) {
